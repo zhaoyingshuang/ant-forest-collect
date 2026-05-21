@@ -34,3 +34,22 @@ HDC_PATH=/path/to/hdc python ant_forest_collect.py
 1. 通过 HDC 截取设备屏幕
 2. 使用 RapidOCR 识别"一键收"和"找能量"按钮位置
 3. 通过 HDC 模拟点击完成自动收取
+
+## 赞赏
+
+如果这个项目对你有帮助，欢迎请作者喝杯咖啡 ☕
+
+<table>
+  <tr>
+    <td align="center">微信赞赏</td>
+    <td align="center">支付宝赞赏</td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="docs/images/wechat_pay.jpg" width="200" alt="微信赞赏码">
+    </td>
+    <td align="center">
+      <img src="docs/images/alipay.jpg" width="200" alt="支付宝赞赏码">
+    </td>
+  </tr>
+</table>
