@@ -2,52 +2,28 @@
 
 基于 OCR 识别的蚂蚁森林自动收取工具，适用于鸿蒙设备（通过 HDC 控制）。
 
-## 依赖
-
-- Python 3.8+
-- OpenCV
-- RapidOCR
-- HDC（HarmonyOS Device Connector）
-
-## 安装
-
-```bash
-pip install -r requirements.txt
-```
-
 ## 前置条件
 
 1. **鸿蒙设备**：已开启 USB 调试，并通过 USB 连接电脑
-2. **HDC 工具**：已安装 HarmonyOS Device Connector，可通过命令行调用
+2. **HDC 工具**：从[华为开发者官网](https://developer.huawei.com/consumer/cn/download/)下载 Command Line Tools 并解压
 3. **蚂蚁森林**：打开支付宝，进入蚂蚁森林好友排行榜页面（停留在第一个好友）
 
-## 使用
-
-**1. 安装依赖**
+## 快速开始
 
 ```bash
-pip install -r requirements.txt
-```
+# 一键检查环境（Python、依赖、HDC、设备连接）
+bash setup.sh
 
-**2. 确认设备连接**
-
-```bash
-hdc list targets
-```
-
-能看到设备序列号即表示连接成功。
-
-**3. 运行**
-
-确保手机停留在蚂蚁森林好友排行榜页面，然后执行：
-
-```bash
+# 运行
 python ant_forest_collect.py
 ```
 
-**4. 自定义 HDC 路径**
+脚本会自动从以下位置查找 HDC：
+- 环境变量 `HDC_PATH`
+- 系统 PATH
+- `~/Downloads/command-line-tools/sdk/` 下的常见路径
 
-如果 `hdc` 不在默认路径（`~/Downloads/command-line-tools/sdk/default/openharmony/toolchains/hdc`），可通过环境变量指定：
+如果 hdc 不在上述位置，可手动指定：
 
 ```bash
 HDC_PATH=/path/to/hdc python ant_forest_collect.py

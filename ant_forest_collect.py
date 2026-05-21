@@ -9,12 +9,54 @@ import cv2
 import subprocess
 import time
 import os
+import sys
+import shutil
+import glob
 import logging
 from rapidocr_onnxruntime import RapidOCR
 
+def find_hdc():
+    """按优先级自动查找 hdc 工具"""
+    # 1. 环境变量
+    env_path = os.environ.get("HDC_PATH")
+    if env_path:
+        p = os.path.expanduser(env_path)
+        if os.path.isfile(p):
+            return p
+
+    # 2. 系统 PATH
+    p = shutil.which("hdc")
+    if p:
+        return p
+
+    # 3. 常见路径
+    candidates = [
+        "~/Downloads/command-line-tools/sdk/default/openharmony/toolchains/hdc",
+        "~/Library/Huawei/sdk/default/openharmony/toolchains/hdc",
+        "~/DevEcoStudio/sdk/default/openharmony/toolchains/hdc",
+    ]
+    home = os.path.expanduser("~")
+    for c in candidates:
+        p = os.path.expanduser(c)
+        if os.path.isfile(p):
+            return p
+
+    # 4. 通配符匹配（HarmonyOS-NEXT-* 版本目录）
+    patterns = [
+        "~/Downloads/command-line-tools/sdk/HarmonyOS-*/openharmony/toolchains/hdc",
+    ]
+    for pattern in patterns:
+        matches = glob.glob(os.path.expanduser(pattern))
+        if matches:
+            return matches[0]
+
+    log.error("未找到 hdc 工具，请先安装 Command Line Tools")
+    log.error("参考: https://developer.huawei.com/consumer/cn/download/")
+    log.error("或设置环境变量: HDC_PATH=/path/to/hdc python ant_forest_collect.py")
+    sys.exit(1)
+
 # 配置
-HDC_PATH = os.environ.get("HDC_PATH", "~/Downloads/command-line-tools/sdk/default/openharmony/toolchains/hdc")
-HDC_PATH = os.path.expanduser(HDC_PATH)
+HDC_PATH = find_hdc()
 MAX_COUNT = 100
 MAX_COLLECT_FAIL = 3  # 一键收连续失败次数
 OCR_SCALE = 0.5  # 缩小图像比例，减少CPU占用
