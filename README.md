@@ -10,6 +10,12 @@
 
 ## 快速开始
 
+### 方式一：直接下载（无需安装 Python）
+
+前往 [Releases](https://github.com/zhaoyingshuang/ant-forest-collect/releases) 下载对应平台的可执行文件，双击即可运行。
+
+### 方式二：从源码运行
+
 ```bash
 # 一键检查环境（Python、依赖、HDC、设备连接）
 bash setup.sh
@@ -17,6 +23,8 @@ bash setup.sh
 # 运行
 python ant_forest_collect.py
 ```
+
+### HDC 配置
 
 脚本会自动从以下位置查找 HDC：
 - 环境变量 `HDC_PATH`
