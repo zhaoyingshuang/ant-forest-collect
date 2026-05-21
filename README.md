@@ -15,15 +15,39 @@
 pip install -r requirements.txt
 ```
 
+## 前置条件
+
+1. **鸿蒙设备**：已开启 USB 调试，并通过 USB 连接电脑
+2. **HDC 工具**：已安装 HarmonyOS Device Connector，可通过命令行调用
+3. **蚂蚁森林**：打开支付宝，进入蚂蚁森林好友排行榜页面（停留在第一个好友）
+
 ## 使用
 
-确保 HDC 已安装并可用，然后运行：
+**1. 安装依赖**
+
+```bash
+pip install -r requirements.txt
+```
+
+**2. 确认设备连接**
+
+```bash
+hdc list targets
+```
+
+能看到设备序列号即表示连接成功。
+
+**3. 运行**
+
+确保手机停留在蚂蚁森林好友排行榜页面，然后执行：
 
 ```bash
 python ant_forest_collect.py
 ```
 
-如果 HDC 不在默认路径，可通过环境变量指定：
+**4. 自定义 HDC 路径**
+
+如果 `hdc` 不在默认路径（`~/Downloads/command-line-tools/sdk/default/openharmony/toolchains/hdc`），可通过环境变量指定：
 
 ```bash
 HDC_PATH=/path/to/hdc python ant_forest_collect.py
